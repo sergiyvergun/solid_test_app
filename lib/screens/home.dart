@@ -24,6 +24,15 @@ class _HomeState extends State<Home> {
     Colors.orange,
     Colors.red,
   ];
+  var darkerBackgroundColors = <Color>[
+    Colors.deepPurple[900],
+    Colors.blue[900],
+    Colors.lightBlue[900],
+    Colors.green[900],
+    Colors.yellow[900],
+    Colors.orange[900],
+    Colors.red[900],
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +44,20 @@ class _HomeState extends State<Home> {
           });
         },
         child: AnimatedContainer(
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            gradient: LinearGradient(colors: [
+              backgroundColor,
+              showGradients ? darkerBackgroundColor : backgroundColor
+            ]),
+          ),
           duration: Duration(milliseconds: 200),
-          color: backgroundColors[colorIndex],
           child: Center(child: HomeTitle('Hey there 👋')),
         ),
       ),
       floatingActionButton: CustomCheckboxTile(
         title: 'Show gradient',
-        activeColor: backgroundColors[colorIndex],
+        activeColor: backgroundColor,
         value: showGradients,
         onChanged: (bool newValue) {
           setState(() {
@@ -53,6 +68,10 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+  Color get backgroundColor => backgroundColors[colorIndex];
+
+  Color get darkerBackgroundColor => darkerBackgroundColors[colorIndex];
 
   int get randomColorIndex {
     int randomIndex = Random().nextInt(backgroundColors.length);
