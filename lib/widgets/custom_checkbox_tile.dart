@@ -28,9 +28,10 @@ class CustomCheckboxTile extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                color: Colors.blueGrey[700],
-                fontSize: 20,
-                fontWeight: FontWeight.w500),
+              color: Colors.blueGrey[700],
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           SizedBox(width: 10),
           Checkbox(
