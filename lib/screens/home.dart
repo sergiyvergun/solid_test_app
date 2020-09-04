@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:solid_test_app/widgets/custom_checkbox_tile.dart';
 import 'package:solid_test_app/widgets/home_title.dart';
 
 class Home extends StatefulWidget {
@@ -12,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int colorIndex = 0;
+  bool showGradients = false;
 
   var backgroundColors = <Color>[
     Colors.deepPurple,
@@ -35,11 +37,20 @@ class _HomeState extends State<Home> {
         child: AnimatedContainer(
           duration: Duration(milliseconds: 200),
           color: backgroundColors[colorIndex],
-          child: Center(
-            child: HomeTitle('Hey there 👋'),
-          ),
+          child: Center(child: HomeTitle('Hey there 👋')),
         ),
       ),
+      floatingActionButton: CustomCheckboxTile(
+        title: 'Show gradient',
+        activeColor: backgroundColors[colorIndex],
+        value: showGradients,
+        onChanged: (bool newValue) {
+          setState(() {
+            showGradients = newValue;
+          });
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
