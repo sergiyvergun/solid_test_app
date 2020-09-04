@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     Colors.green,
     Colors.yellow,
     Colors.orange,
-    Colors.red,
+    Colors.red[400],
   ];
   var darkerBackgroundColors = <Color>[
     Colors.deepPurple[900],
@@ -43,16 +43,10 @@ class _HomeState extends State<Home> {
             colorIndex = randomColorIndex;
           });
         },
-        child: AnimatedContainer(
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            gradient: LinearGradient(colors: [
-              backgroundColor,
-              showGradients ? darkerBackgroundColor : backgroundColor
-            ]),
-          ),
-          duration: Duration(milliseconds: 200),
-          child: Center(child: HomeTitle('Hey there 👋')),
+        child: _Background(
+          showGradients: showGradients,
+          backgroundColor: backgroundColor,
+          darkerBackgroundColor: darkerBackgroundColor,
         ),
       ),
       floatingActionButton: CustomCheckboxTile(
@@ -81,5 +75,33 @@ class _HomeState extends State<Home> {
     }
 
     return randomIndex;
+  }
+}
+
+class _Background extends StatelessWidget {
+  final Color backgroundColor;
+  final Color darkerBackgroundColor;
+  final bool showGradients;
+
+  const _Background(
+      {Key key,
+      @required this.backgroundColor,
+      @required this.darkerBackgroundColor,
+      @required this.showGradients})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        gradient: LinearGradient(colors: [
+          backgroundColor,
+          showGradients ? darkerBackgroundColor : backgroundColor
+        ]),
+      ),
+      duration: Duration(milliseconds: 200),
+      child: Center(child: HomeTitle('Hey there 👋')),
+    );
   }
 }
